@@ -15,7 +15,7 @@ export default class Login {
     const formAdmin = this.document.querySelector(`form[data-testid="form-admin"]`)
     formAdmin.addEventListener("submit", this.handleSubmitAdmin)
   }
-  handleSubmitEmployee = e => {
+  handleSubmitEmployee = (e) => {
     e.preventDefault()
     const user = {
       type: "Employee",
@@ -38,25 +38,28 @@ export default class Login {
   }
 
   handleSubmitAdmin = e => {
-    e.preventDefault()
+    e.preventDefault();
+
+    //it was not the right data-testid -> switch employee to admin
     const user = {
       type: "Admin",
-      email: e.target.querySelector(`input[data-testid="employee-email-input"]`).value,
-      password: e.target.querySelector(`input[data-testid="employee-password-input"]`).value,
-      status: "connected"
-    }
-    this.localStorage.setItem("user", JSON.stringify(user))
+      email: e.target.querySelector(`input[data-testid="admin-email-input"]`)
+        .value,
+      password: e.target.querySelector(
+        `input[data-testid="admin-password-input"]`
+      ).value,
+      status: "connected",
+    };
+    this.localStorage.setItem("user", JSON.stringify(user));
     this.login(user)
-      .catch(
-        (err) => this.createUser(user)
-      )
+      .catch((err) => this.createUser(user))
       .then(() => {
-        this.onNavigate(ROUTES_PATH['Dashboard'])
-        this.PREVIOUS_LOCATION = ROUTES_PATH['Dashboard']
-        PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
-        document.body.style.backgroundColor="#fff"
-      })
-  }
+        this.onNavigate(ROUTES_PATH["Dashboard"]);
+        this.PREVIOUS_LOCATION = ROUTES_PATH["Dashboard"];
+        PREVIOUS_LOCATION = this.PREVIOUS_LOCATION;
+        document.body.style.backgroundColor = "#fff";
+      });
+  };
 
   // not need to cover this function by tests
   login = (user) => {
