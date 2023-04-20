@@ -71,6 +71,11 @@ export default class {
   constructor({ document, onNavigate, store, bills, localStorage }) {
     this.document = document
     this.onNavigate = onNavigate
+    this.isOpenCOntainer = {
+      container1: false,
+      container2: false, 
+      container3: false
+    }
     this.store = store
     $('#arrow-icon1').click((e) => this.handleShowTickets(e, bills, 1))
     $('#arrow-icon2').click((e) => this.handleShowTickets(e, bills, 2))
@@ -131,23 +136,42 @@ export default class {
   }
 
   handleShowTickets(e, bills, index) {
-    if (this.counter === undefined || this.index !== index) this.counter = 0
+
     if (this.index === undefined || this.index !== index) this.index = index
-    if (this.counter % 2 === 0) {
+
+    // if container index is false, open it
+    if (!this.isOpenCOntainer[`container${index}`]) {
       $(`#arrow-icon${this.index}`).css({ transform: 'rotate(0deg)'})
       $(`#status-bills-container${this.index}`)
         .html(cards(filteredBills(bills, getStatus(this.index))))
-      this.counter ++
+        this.isOpenCOntainer[`container${index}`] = true
     } else {
       $(`#arrow-icon${this.index}`).css({ transform: 'rotate(90deg)'})
       $(`#status-bills-container${this.index}`)
         .html("")
-      this.counter ++
+        this.isOpenCOntainer[`container${index}`] = false
     }
 
     bills.forEach(bill => {
-      $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
+
+      // off is a jquery method wich reset event
+      $(`#open-bill${bill.id}`).off().click((e) => this.handleEditTicket(e, bill, bills))
     })
+
+
+    // reset bills and counter, when all container is closed
+    if(!this.isOpenCOntainer.container1 && !this.isOpenCOntainer.container2 && !this.isOpenCOntainer.container3) {
+      bills.forEach(bill => {
+        $(`#open-bill${bill.id}`).css({ background: '#0D5AE5' })
+
+        $('.dashboard-right-container div').html(`
+          <div id="big-billed-icon" data-testid="big-billed-icon"> ${BigBilledIcon} </div>
+        `)
+        $('.vertical-navbar').css({ height: '120vh' })
+        this.counter = 0
+      })
+   
+    }
 
     return bills
 
