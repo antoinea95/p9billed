@@ -133,7 +133,7 @@ describe("Given I am a user connected as Employee", () => {
  
   describe("When I navigate to Bills", () => {
     
-    test("fetches bills from mock API GET", async () => {
+    test("Then it should fetch bills from mock API GET", async () => {
 
       const spyMock = jest.spyOn(mockedStore, 'bills');
       const bills = await mockedStore.bills().list()
@@ -167,7 +167,7 @@ describe("Given I am a user connected as Employee", () => {
         document.body.appendChild(root)
         router()
       })
-      test("fetches bills from an API and fails with 404 message error", async () => {
+      test("Then it should fetch bills from an API and fails with 404 message error", async () => {
   
         mockedStore.bills.mockImplementationOnce(() => {
           return {
@@ -181,7 +181,7 @@ describe("Given I am a user connected as Employee", () => {
         expect(message).toBeTruthy()
       })
   
-      test("fetches messages from an API and fails with 500 message error", async () => {
+      test("Then it should fetch bills from an API and fails with 500 message error", async () => {
   
         mockedStore.bills.mockImplementationOnce(() => {
           return {
