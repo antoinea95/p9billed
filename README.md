@@ -1,16 +1,16 @@
 # p9billed
 Projet n°9 de ma formation Openclassrooms
 
-## Présentation du projet
+# Présentation du projet
 
-# Brief :
+## Brief :
 
 " Vous êtes développeur front-end chez Billed, une entreprise qui produit des solutions Saas destinées aux équipes de ressources humaines.
 Malheureusement pour Billed, Garance, une collègue de la feature team “note de frais” a quitté l’entreprise avant d’avoir terminé l’application. 
 Dans deux semaines, l’équipe doit montrer la solution qui fonctionne à l’ensemble de l’entreprise. Matthieu, Lead Developer de la feature team 
 a demandé à être aidé pour tenir les délais et vous avez appris hier lors de la réunion d’équipe que c’est vous qui avez été désigné !"
 
-# Objectif : 
+## Objectif : 
 
 - Fixer les bugs identifiés dans le rapport de bug fourni par Jest.
 - Fixer les bugs identifiés par Leila sur le parcours employé.
