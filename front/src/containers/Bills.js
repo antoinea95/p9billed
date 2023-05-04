@@ -34,7 +34,8 @@ export default class {
       .list()
       .then(snapshot => {
         console.log(snapshot);
-        const bills = snapshot
+        const sortSnapshot = snapshot.sort((a,b) => (new Date(b.date) - new Date(a.date)))
+        const bills = sortSnapshot
           .map(doc => {
             try {
               return {
@@ -54,7 +55,7 @@ export default class {
             }
           })
           console.log('length', bills.length)
-        return bills
+          return bills
       })
     }
   }
